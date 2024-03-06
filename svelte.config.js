@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from "svelte-adapter-bun";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -7,10 +7,12 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    paths: {
-          base: process.env.NODE_ENV === "production" ? "/kongmenglor.github.io" : "",
-      },
   },
+  prerender: {
+    onError: () => {
+      return "continue";
+    }
+  }
 };
 
 export default config;
